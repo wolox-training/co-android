@@ -1,0 +1,12 @@
+<resources>
+
+    <!-- General -->
+    <string name="example_title">ExampleFragment</string>
+    <string name="request_toolbar_title">Example Request</string>
+    <string name="fragment_login_email">Email</string>
+    <string name="fragment_login_password">Password</string>
+    <string name="fragment_button_login">Login</string>
+    <string name="fragment_button_signup">Sign up</string>
+    <string name="example_wolox_phone">By joining you agree to our Terms &amp; Conditions</string>
+
+</resources>
