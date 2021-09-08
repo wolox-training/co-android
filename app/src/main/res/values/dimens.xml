@@ -46,4 +46,8 @@
     <dimen name="font_huge">24sp</dimen>
 
     <!-- Add your custom dimens here -->
+    <dimen name="height_container_cover">240dp</dimen>
+    <dimen name="height_image_cover">200dp</dimen>
+    <dimen name="height_image_logo">100dp</dimen>
+
 </resources>
