@@ -42,14 +42,14 @@
             android:hint="@string/fragment_login_email"
             android:inputType="textEmailAddress"
             android:maxLines="1"
-            app:layout_constraintBottom_toTopOf="@id/favouriteColorInput"
+            app:layout_constraintBottom_toTopOf="@id/passwordInput"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/containerCover"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <EditText
-            android:id="@+id/favouriteColorInput"
+            android:id="@+id/passwordInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_large_extra"
@@ -71,17 +71,17 @@
             android:layout_marginTop="@dimen/spacing_large"
             android:text="@string/fragment_button_login"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/favouriteColorInput"
-            app:layout_constraintStart_toStartOf="@id/favouriteColorInput"
-            app:layout_constraintTop_toBottomOf="@id/favouriteColorInput" />
+            app:layout_constraintEnd_toEndOf="@id/passwordInput"
+            app:layout_constraintStart_toStartOf="@id/passwordInput"
+            app:layout_constraintTop_toBottomOf="@id/passwordInput" />
 
         <Button
             android:id="@+id/signupButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_large_extra"
-            android:text="@string/fragment_button_signup"
             android:backgroundTint="@color/colorPrimary"
+            android:text="@string/fragment_button_signup"
             android:textColor="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/loginButton"
@@ -99,7 +99,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
