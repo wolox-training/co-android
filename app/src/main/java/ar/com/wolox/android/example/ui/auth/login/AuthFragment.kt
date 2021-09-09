@@ -1,20 +1,22 @@
 package ar.com.wolox.android.example.ui.auth.login
 
-import android.content.Context
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentLoginBinding
+import ar.com.wolox.android.example.utils.UserSession
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
+import ar.com.wolox.wolmo.core.util.ToastFactory
+import javax.inject.Inject
 
-class AuthFragment : WolmoFragment<FragmentLoginBinding, AuthPresenter>(), AuthView {
+class AuthFragment @Inject constructor() : WolmoFragment<FragmentLoginBinding, AuthPresenter>(), AuthView {
+    @Inject internal lateinit var toastFactory: ToastFactory
+    @Inject internal lateinit var userSession: UserSession
+
     override fun layout() = R.layout.fragment_login
 
     override fun init() {
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        val emailUser = sharedPref.getString("emailUser", "")
-        val passwordUser = sharedPref.getString("passwordUser", "")
         with(binding) {
-            usernameInput.setText(emailUser)
-            passwordInput.setText(passwordUser)
+            usernameInput.setText(userSession.username)
+            passwordInput.setText(userSession.password)
         }
     }
 
@@ -26,25 +28,25 @@ class AuthFragment : WolmoFragment<FragmentLoginBinding, AuthPresenter>(), AuthV
         }
     }
 
-    override fun setEmailError(msg: String) {
-        binding.usernameInput.setError(msg)
-    }
-
-    override fun setPasswordError(msg: String) {
-        binding.passwordInput.setError(msg)
-    }
-
-    override fun setLoginUser(user: String, password: String) {
-
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        with(sharedPref.edit()) {
-            putString("emailUser", user)
-            putString("passwordUser", password)
-            commit()
+    override fun setErrors(list: List<LoginFormErrors>) {
+        with(binding) {
+            list.forEach() {
+                if (it === LoginFormErrors.EMPTY_PASSWORD) passwordInput.setError(LoginFormErrors.EMPTY_PASSWORD.msg)
+                if (it === LoginFormErrors.INVALID_EMAIL) usernameInput.setError(LoginFormErrors.INVALID_EMAIL.msg)
+                if (it === LoginFormErrors.EMPTY_EMAIL) usernameInput.setError(LoginFormErrors.EMPTY_EMAIL.msg)
+            }
         }
     }
+
+    override fun setLoginUser() = toastFactory.show(R.string.successful_login)
 
     companion object {
         fun newInstance() = AuthFragment()
     }
+}
+
+enum class LoginFormErrors(val msg: String) {
+    EMPTY_PASSWORD("This field is required"),
+    EMPTY_EMAIL("This field is required"),
+    INVALID_EMAIL("The email format is not valid")
 }

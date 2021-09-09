@@ -9,4 +9,6 @@
     <string name="fragment_button_signup">Sign up</string>
     <string name="example_wolox_phone">By joining you agree to our <u>Terms &amp; Conditions</u></string>
 
+    <string name="successful_login">Successful login.</string>
+
 </resources>
