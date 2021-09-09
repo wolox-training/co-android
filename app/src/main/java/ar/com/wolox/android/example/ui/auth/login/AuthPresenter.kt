@@ -6,21 +6,25 @@ import javax.inject.Inject
 
 class AuthPresenter @Inject constructor(private val userSession: UserSession) : BasePresenter<AuthView>() {
 
-    fun onLoginButtonClicked(email: String, password: String) {
+    fun onLoginButtonClicked(email: String, passwordForm: String) {
         val list: MutableList<LoginFormErrors> = mutableListOf()
         val validEmail = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
-        if (!validEmail) list.add(LoginFormErrors.INVALID_EMAIL)
-        if (password.isEmpty()) list.add(LoginFormErrors.EMPTY_PASSWORD)
-        if (email.isEmpty()) list.add(LoginFormErrors.EMPTY_EMAIL)
+        list.run {
+            if (!validEmail) add(LoginFormErrors.INVALID_EMAIL)
+            if (passwordForm.isEmpty()) add(LoginFormErrors.EMPTY_PASSWORD)
+            if (email.isEmpty()) add(LoginFormErrors.EMPTY_EMAIL)
 
-        if (list.isNotEmpty()) {
-            view?.setErrors(list)
-            return
+            if (isNotEmpty()) {
+                view?.setErrors(list)
+                return
+            }
         }
 
-        userSession.username = email
-        userSession.password = password
+        userSession.run {
+            username = email
+            password = passwordForm
+        }
         view?.setLoginUser()
     }
 }

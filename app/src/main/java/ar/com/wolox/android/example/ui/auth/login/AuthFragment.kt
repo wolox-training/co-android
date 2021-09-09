@@ -15,8 +15,10 @@ class AuthFragment @Inject constructor() : WolmoFragment<FragmentLoginBinding, A
 
     override fun init() {
         with(binding) {
-            usernameInput.setText(userSession.username)
-            passwordInput.setText(userSession.password)
+            userSession.run {
+                usernameInput.setText(username)
+                passwordInput.setText(password)
+            }
         }
     }
 
