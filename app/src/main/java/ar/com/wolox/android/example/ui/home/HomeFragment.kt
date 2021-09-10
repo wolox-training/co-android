@@ -14,3 +14,5 @@ class HomeFragment : WolmoFragment<FragmentHomeBinding, HomePresenter>(), HomeVi
         fun newInstance() = HomeFragment()
     }
 }
+
+interface HomeView

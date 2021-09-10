@@ -2,6 +2,7 @@ package ar.com.wolox.android.example.di
 
 import android.app.Application
 import ar.com.wolox.android.example.BootstrapApplication
+import ar.com.wolox.android.example.ui.auth.RootModule
 import ar.com.wolox.android.example.ui.auth.login.AuthModule
 import ar.com.wolox.android.example.ui.auth.signup.SignUpModule
 import ar.com.wolox.android.example.ui.home.HomeModule
@@ -17,7 +18,7 @@ import dagger.android.support.AndroidSupportInjectionModule
 @ApplicationScope
 @Component(dependencies = [NetworkingComponent::class],
         modules = [AndroidSupportInjectionModule::class, DefaultModule::class, ContextModule::class,
-            AuthModule::class, SignUpModule::class, HomeModule::class])
+            RootModule::class, AuthModule::class, SignUpModule::class, HomeModule::class])
 interface AppComponent : AndroidInjector<BootstrapApplication> {
 
     @Component.Builder

@@ -4,7 +4,7 @@ import android.content.Context
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.ActivityBaseBinding
 import ar.com.wolox.wolmo.core.activity.WolmoActivity
-import ar.com.wolox.wolmo.core.util.jumpTo
+import ar.com.wolox.wolmo.core.util.jumpToClearingTask
 import javax.inject.Inject
 
 class HomeActivity @Inject constructor() : WolmoActivity<ActivityBaseBinding>() {
@@ -15,6 +15,6 @@ class HomeActivity @Inject constructor() : WolmoActivity<ActivityBaseBinding>() 
     }
 
     companion object {
-        fun start(context: Context) = context.jumpTo(HomeActivity::class.java)
+        fun start(context: Context) = context.jumpToClearingTask(HomeActivity::class.java)
     }
 }

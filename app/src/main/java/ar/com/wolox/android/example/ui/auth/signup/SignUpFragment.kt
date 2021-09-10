@@ -14,3 +14,5 @@ class SignUpFragment : WolmoFragment<FragmentSignupBinding, SignUpPresenter>(), 
         fun newInstance() = SignUpFragment()
     }
 }
+
+interface SignUpView
