@@ -2,9 +2,12 @@ package ar.com.wolox.android.example.ui.auth.login
 
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentLoginBinding
+import ar.com.wolox.android.example.ui.auth.signup.SignUpActivity
+import ar.com.wolox.android.example.ui.home.HomeActivity
 import ar.com.wolox.android.example.utils.UserSession
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import ar.com.wolox.wolmo.core.util.ToastFactory
+import ar.com.wolox.wolmo.core.util.openBrowser
 import javax.inject.Inject
 
 class AuthFragment @Inject constructor() : WolmoFragment<FragmentLoginBinding, AuthPresenter>(), AuthView {
@@ -27,6 +30,8 @@ class AuthFragment @Inject constructor() : WolmoFragment<FragmentLoginBinding, A
             loginButton.setOnClickListener {
                 presenter.onLoginButtonClicked(usernameInput.text.toString(), passwordInput.text.toString())
             }
+            signupButton.setOnClickListener { presenter.onSignUpButtonClicked() }
+            woloxLink.setOnClickListener { presenter.onLinkClicked() }
         }
     }
 
@@ -40,7 +45,14 @@ class AuthFragment @Inject constructor() : WolmoFragment<FragmentLoginBinding, A
         }
     }
 
-    override fun setLoginUser() = toastFactory.show(R.string.successful_login)
+    override fun setLoginUser() {
+        toastFactory.show(R.string.successful_login)
+        HomeActivity.start(requireContext())
+    }
+
+    override fun goToSignUp() = SignUpActivity.start(requireContext())
+
+    override fun openBrowser(url: String) = requireContext().openBrowser(url)
 
     companion object {
         fun newInstance() = AuthFragment()

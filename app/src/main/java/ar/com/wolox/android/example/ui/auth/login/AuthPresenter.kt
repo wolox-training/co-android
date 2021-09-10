@@ -27,4 +27,12 @@ class AuthPresenter @Inject constructor(private val userSession: UserSession) : 
         }
         view?.setLoginUser()
     }
+
+    fun onSignUpButtonClicked() = view?.goToSignUp()
+
+    fun onLinkClicked() = view?.openBrowser(URL)
+
+    companion object {
+        private const val URL = "www.wolox.com.ar"
+    }
 }

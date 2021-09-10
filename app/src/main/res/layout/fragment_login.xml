@@ -90,11 +90,11 @@
             app:layout_constraintVertical_bias="0.073" />
 
         <TextView
-            android:id="@+id/woloxPhone"
+            android:id="@+id/woloxLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="bottom|center_horizontal"
-            android:text="@string/example_wolox_phone"
+            android:text="@string/example_wolox_link"
             android:textSize="@dimen/font_medium_extra"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

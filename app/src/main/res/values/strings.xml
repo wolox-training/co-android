@@ -7,7 +7,9 @@
     <string name="fragment_login_password">Password</string>
     <string name="fragment_button_login">Login</string>
     <string name="fragment_button_signup">Sign up</string>
-    <string name="example_wolox_phone">By joining you agree to our <u>Terms &amp; Conditions</u></string>
+    <string name="example_wolox_link">By joining you agree to our <u>Terms &amp; Conditions</u></string>
+    <string name="textSignUp">Registration Form</string>
+    <string name="textHome">Home Page</string>
 
     <string name="successful_login">Successful login.</string>
 
