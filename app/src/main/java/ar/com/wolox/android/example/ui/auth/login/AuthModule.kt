@@ -1,6 +1,5 @@
-package ar.com.wolox.android.example.ui.auth
+package ar.com.wolox.android.example.ui.auth.login
 
-import ar.com.wolox.android.example.ui.auth.login.AuthFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

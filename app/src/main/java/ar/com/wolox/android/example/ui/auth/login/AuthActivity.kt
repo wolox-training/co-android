@@ -1,8 +1,7 @@
-package ar.com.wolox.android.example.ui.auth
+package ar.com.wolox.android.example.ui.auth.login
 
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.ActivityBaseBinding
-import ar.com.wolox.android.example.ui.auth.login.AuthFragment
 import ar.com.wolox.wolmo.core.activity.WolmoActivity
 import javax.inject.Inject
 
