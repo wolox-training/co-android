@@ -1,19 +1,21 @@
 package ar.com.wolox.android.example.model
 
+import com.google.gson.annotations.SerializedName
+
 data class LoginResponse(
-    val data: Data,
+    val data: DataUserResponse,
     val success: Boolean,
     val errors: List<String>
 )
 
-data class Data(
-    val id: Int,
+data class DataUserResponse(
+    @SerializedName("id") val idReferencia: Int,
     val email: String,
     val password: String,
-    val provider: String,
+    @SerializedName("provider") val proveedor: String,
     val uid: String,
     val allowPasswordChange: Boolean,
-    val name: String,
-    val nickname: String,
-    val image: String? = null
+    @SerializedName("name") val nombre: String,
+    @SerializedName("nickname") val apodo: String,
+    @SerializedName("image") val imagen: String? = null
 )

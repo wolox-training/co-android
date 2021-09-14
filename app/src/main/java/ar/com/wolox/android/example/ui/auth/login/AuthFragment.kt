@@ -1,6 +1,6 @@
 package ar.com.wolox.android.example.ui.auth.login
 
-import android.view.View
+import androidx.core.view.isVisible
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentLoginBinding
 import ar.com.wolox.android.example.ui.auth.signup.SignUpActivity
@@ -62,9 +62,7 @@ class AuthFragment @Inject constructor() : WolmoFragment<FragmentLoginBinding, A
         }
     }
 
-    override fun showLoader(visible: Boolean) {
-        with(binding) { loaderLogin.visibility = if (visible) View.VISIBLE else View.INVISIBLE }
-    }
+    override fun showLoader(visible: Boolean) { binding.loaderLogin.isVisible = visible }
 
     companion object {
         fun newInstance() = AuthFragment()
