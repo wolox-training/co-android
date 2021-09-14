@@ -8,4 +8,8 @@ interface AuthView {
     fun goToSignUp()
 
     fun openBrowser(url: String)
+
+    fun showErrorLogin(status: ResponseStatus)
+
+    fun showLoader(visible: Boolean)
 }
