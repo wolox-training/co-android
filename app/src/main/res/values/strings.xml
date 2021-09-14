@@ -14,5 +14,6 @@
     <string name="successful_login">Successful login.</string>
     <string name="request_error_login">Invalid login credentials. Please try again.</string>
     <string name="default_error">Whoops something went wrong.</string>
+    <string name="request_without_connection">Your network is unavailable. Check your data or wifi connection.</string>
 
 </resources>

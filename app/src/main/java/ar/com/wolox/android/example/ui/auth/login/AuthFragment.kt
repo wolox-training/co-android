@@ -1,11 +1,13 @@
 package ar.com.wolox.android.example.ui.auth.login
 
-import androidx.core.view.isVisible
+import android.os.Build
+import androidx.annotation.RequiresApi
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentLoginBinding
 import ar.com.wolox.android.example.ui.auth.signup.SignUpActivity
 import ar.com.wolox.android.example.ui.home.HomeActivity
 import ar.com.wolox.android.example.utils.UserSession
+import ar.com.wolox.android.example.utils.toggleVisibility
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import ar.com.wolox.wolmo.core.util.ToastFactory
 import ar.com.wolox.wolmo.core.util.openBrowser
@@ -26,6 +28,7 @@ class AuthFragment @Inject constructor() : WolmoFragment<FragmentLoginBinding, A
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun setListeners() {
         with(binding) {
             loginButton.setOnClickListener {
@@ -58,11 +61,12 @@ class AuthFragment @Inject constructor() : WolmoFragment<FragmentLoginBinding, A
     override fun showErrorLogin(status: ResponseStatus) {
         when (status) {
             ResponseStatus.ERROR_CREDENTIALS -> toastFactory.show(R.string.request_error_login)
+            ResponseStatus.WITHOUT_CONNECTION -> toastFactory.show(R.string.request_without_connection)
             else -> toastFactory.show(R.string.default_error)
         }
     }
 
-    override fun showLoader(visible: Boolean) { binding.loaderLogin.isVisible = visible }
+    override fun showLoader(visible: Boolean) { binding.loaderLogin.toggleVisibility(visible) }
 
     companion object {
         fun newInstance() = AuthFragment()
