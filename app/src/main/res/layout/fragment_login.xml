@@ -31,6 +31,19 @@
                 android:src="@drawable/wolox_logo" />
         </RelativeLayout>
 
+        <ProgressBar
+            android:id="@+id/loaderLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/colorPrimary"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@id/usernameInput"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/containerCover" />
+
         <EditText
             android:id="@+id/usernameInput"
             android:layout_width="match_parent"

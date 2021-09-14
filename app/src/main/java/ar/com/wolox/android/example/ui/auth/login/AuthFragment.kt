@@ -1,5 +1,6 @@
 package ar.com.wolox.android.example.ui.auth.login
 
+import androidx.core.view.isVisible
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentLoginBinding
 import ar.com.wolox.android.example.ui.auth.signup.SignUpActivity
@@ -53,6 +54,15 @@ class AuthFragment @Inject constructor() : WolmoFragment<FragmentLoginBinding, A
     override fun goToSignUp() = SignUpActivity.start(requireContext())
 
     override fun openBrowser(url: String) = requireContext().openBrowser(url)
+
+    override fun showErrorLogin(status: ResponseStatus) {
+        when (status) {
+            ResponseStatus.ERROR_CREDENTIALS -> toastFactory.show(R.string.request_error_login)
+            else -> toastFactory.show(R.string.default_error)
+        }
+    }
+
+    override fun showLoader(visible: Boolean) { binding.loaderLogin.isVisible = visible }
 
     companion object {
         fun newInstance() = AuthFragment()
