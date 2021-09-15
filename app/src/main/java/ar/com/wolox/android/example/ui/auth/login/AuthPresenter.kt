@@ -14,7 +14,7 @@ class AuthPresenter @Inject constructor(
 ) : CoroutineBasePresenter<AuthView>() {
 
     fun onLoginButtonClicked(email: String, password: String) {
-        if (view?.isOnline() == false) {
+        if (!view?.isOnline()!!) {
             view?.showErrorLogin(ResponseStatus.WITHOUT_CONNECTION)
             return
         }
