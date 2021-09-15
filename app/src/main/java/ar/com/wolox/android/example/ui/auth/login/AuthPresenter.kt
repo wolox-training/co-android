@@ -1,10 +1,5 @@
 package ar.com.wolox.android.example.ui.auth.login
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
-import androidx.annotation.RequiresApi
 import ar.com.wolox.android.example.model.LoginData
 import ar.com.wolox.android.example.network.builder.networkRequest
 import ar.com.wolox.android.example.network.repository.LoginRepository
@@ -15,13 +10,11 @@ import javax.inject.Inject
 
 class AuthPresenter @Inject constructor(
     private val loginRepository: LoginRepository,
-    private val context: Context,
     private val userSession: UserSession
 ) : CoroutineBasePresenter<AuthView>() {
 
-    @RequiresApi(Build.VERSION_CODES.M)
     fun onLoginButtonClicked(email: String, password: String) {
-        if (!isOnline()) {
+        if (view?.isOnline() == false) {
             view?.showErrorLogin(ResponseStatus.WITHOUT_CONNECTION)
             return
         }
@@ -40,24 +33,6 @@ class AuthPresenter @Inject constructor(
         }
 
         loginRequest(LoginData(email, password))
-    }
-
-    @RequiresApi(Build.VERSION_CODES.M)
-    fun isOnline(): Boolean {
-        val result: Boolean
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkCapabilities = connectivityManager.activeNetwork ?: return false
-        val actNw =
-            connectivityManager.getNetworkCapabilities(networkCapabilities) ?: return false
-        result = when {
-            actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-            actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-            actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-            else -> false
-        }
-
-        return result
     }
 
     private fun loginRequest(userData: LoginData) = launch {

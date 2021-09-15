@@ -12,4 +12,6 @@ interface AuthView {
     fun showErrorLogin(status: ResponseStatus)
 
     fun showLoader(visible: Boolean)
+
+    fun isOnline(): Boolean
 }

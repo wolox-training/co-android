@@ -1,5 +1,8 @@
 package ar.com.wolox.android.example.ui.auth.login
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.annotation.RequiresApi
 import ar.com.wolox.android.R
@@ -16,6 +19,7 @@ import javax.inject.Inject
 class AuthFragment @Inject constructor() : WolmoFragment<FragmentLoginBinding, AuthPresenter>(), AuthView {
     @Inject internal lateinit var toastFactory: ToastFactory
     @Inject internal lateinit var userSession: UserSession
+    @Inject internal lateinit var context: Context
 
     override fun layout() = R.layout.fragment_login
 
@@ -67,6 +71,25 @@ class AuthFragment @Inject constructor() : WolmoFragment<FragmentLoginBinding, A
     }
 
     override fun showLoader(visible: Boolean) { binding.loaderLogin.toggleVisibility(visible) }
+
+    override fun isOnline(): Boolean {
+        var result = false
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            val connectivityManager =
+                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val networkCapabilities = connectivityManager.activeNetwork ?: return false
+            val actNw =
+                connectivityManager.getNetworkCapabilities(networkCapabilities) ?: return false
+            result = when {
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                else -> false
+            }
+        }
+
+        return result
+    }
 
     companion object {
         fun newInstance() = AuthFragment()
