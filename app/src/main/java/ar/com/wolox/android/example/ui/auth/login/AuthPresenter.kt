@@ -14,6 +14,10 @@ class AuthPresenter @Inject constructor(
 ) : CoroutineBasePresenter<AuthView>() {
 
     fun onLoginButtonClicked(email: String, password: String) {
+        if (!view?.isOnline()!!) {
+            view?.showErrorLogin(ResponseStatus.WITHOUT_CONNECTION)
+            return
+        }
         val list: MutableList<LoginFormErrors> = mutableListOf()
         val validEmail = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
@@ -59,5 +63,6 @@ class AuthPresenter @Inject constructor(
 
 enum class ResponseStatus {
     ERROR_CREDENTIALS,
-    DEFAULT_ERROR
+    DEFAULT_ERROR,
+    WITHOUT_CONNECTION
 }
