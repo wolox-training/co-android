@@ -1,5 +1,6 @@
 package ar.com.wolox.android.example.ui.auth.login
 
+import ar.com.wolox.android.example.model.LoginData
 import ar.com.wolox.android.example.model.LoginResponse
 import ar.com.wolox.android.example.network.repository.LoginRepository
 import ar.com.wolox.android.example.utils.Extras
@@ -83,8 +84,34 @@ class AuthPresenterTest : WolmoPresenterTest<AuthView, AuthPresenter>() {
             Extras.MockTesting.FAIL_PASSWORD
         ).join()
 
-        verify(view, times(1)).showLoader(true)
-        verify(view, times(1)).showLoader(false)
+        verify(view, times(1)).showErrorLogin(ResponseStatus.ERROR_CREDENTIALS)
+    }
+
+    @Test
+    fun `When the password is incorrect`() = runBlocking {
+        val userLoginData = LoginData(Extras.MockTesting.EMAIL, Extras.MockTesting.FAIL_PASSWORD)
+        val response = mock(Response::class.java) as Response<LoginResponse>
+        whenever(loginRepository.loginUser(userLoginData)).doReturn(NetworkResponse.Error(response))
+
+        presenter.onLoginButtonClicked(
+            Extras.MockTesting.EMAIL,
+            Extras.MockTesting.FAIL_PASSWORD
+        ).join()
+
+        verify(view, times(1)).showErrorLogin(ResponseStatus.ERROR_CREDENTIALS)
+    }
+
+    @Test
+    fun `When the email is incorrect`() = runBlocking {
+        val userLoginData = LoginData(Extras.MockTesting.FAIL_EMAIL, Extras.MockTesting.PASSWORD)
+        val response = mock(Response::class.java) as Response<LoginResponse>
+        whenever(loginRepository.loginUser(userLoginData)).doReturn(NetworkResponse.Error(response))
+
+        presenter.onLoginButtonClicked(
+            Extras.MockTesting.FAIL_EMAIL,
+            Extras.MockTesting.PASSWORD
+        ).join()
+
         verify(view, times(1)).showErrorLogin(ResponseStatus.ERROR_CREDENTIALS)
     }
 
