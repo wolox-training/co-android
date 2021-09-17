@@ -36,6 +36,11 @@ class AuthFragment @Inject constructor() : WolmoFragment<FragmentLoginBinding, A
     override fun setListeners() {
         with(binding) {
             loginButton.setOnClickListener {
+                if (!isOnline()) {
+                    showErrorLogin(ResponseStatus.WITHOUT_CONNECTION)
+                    return@setOnClickListener
+                }
+
                 presenter.onLoginButtonClicked(usernameInput.text.toString(), passwordInput.text.toString())
             }
             signupButton.setOnClickListener { presenter.onSignUpButtonClicked() }
