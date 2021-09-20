@@ -13,13 +13,9 @@ class AuthPresenter @Inject constructor(
     private val userSession: UserSession
 ) : CoroutineBasePresenter<AuthView>() {
 
-    fun onLoginButtonClicked(email: String, password: String) {
-        if (!view?.isOnline()!!) {
-            view?.showErrorLogin(ResponseStatus.WITHOUT_CONNECTION)
-            return
-        }
+    fun onLoginButtonClicked(email: String, password: String) = launch {
         val list: MutableList<LoginFormErrors> = mutableListOf()
-        val validEmail = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        val validEmail = androidx.core.util.PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()
 
         list.run {
             if (!validEmail) add(LoginFormErrors.INVALID_EMAIL)
@@ -28,20 +24,16 @@ class AuthPresenter @Inject constructor(
 
             if (isNotEmpty()) {
                 view?.setErrors(list)
-                return
+                return@launch
             }
         }
 
-        loginRequest(LoginData(email, password))
-    }
-
-    private fun loginRequest(userData: LoginData) = launch {
         view?.showLoader(true)
-        networkRequest(loginRepository.loginUser(userData)) {
+        networkRequest(loginRepository.loginUser(LoginData(email, password))) {
             onResponseSuccessful {
                 userSession.apply {
-                    username = userData.email
-                    password = userData.password
+                    username = email
+                    this.password = password
                 }
 
                 view?.setLoginUser()
