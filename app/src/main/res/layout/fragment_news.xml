@@ -8,11 +8,11 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textHome"
+            android:id="@+id/text_news"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/textHome"
+            android:text="@string/text_news"
             android:textSize="@dimen/font_big" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
