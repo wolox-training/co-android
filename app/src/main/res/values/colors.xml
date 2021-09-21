@@ -7,5 +7,6 @@
     <color name="colorSecondaryTransparent">#808DC63F</color>
     <color name="colorPrimaryTransparent">#801D9BD7</color>
     <color name="colorAccent">#FFFFFF</color>
+    <color name="colorIconBackground">#FFFFFF</color>
     <color name="colorTintTabSelected">#8DC63F</color>
 </resources>
