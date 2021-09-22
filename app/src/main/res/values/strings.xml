@@ -2,18 +2,23 @@
 
     <!-- General -->
     <string name="example_title">ExampleFragment</string>
+    <string name="title_toolbar">Wolox</string>
     <string name="request_toolbar_title">Example Request</string>
     <string name="fragment_login_email">Email</string>
     <string name="fragment_login_password">Password</string>
     <string name="fragment_button_login">Login</string>
     <string name="fragment_button_signup">Sign up</string>
     <string name="example_wolox_link">By joining you agree to our <u>Terms &amp; Conditions</u></string>
-    <string name="textSignUp">Registration Form</string>
-    <string name="textHome">Home Page</string>
+    <string name="text_signUp">Registration Form</string>
+    <string name="text_news">News View</string>
+    <string name="text_profile">Profile View</string>
 
     <string name="successful_login">Successful login.</string>
     <string name="request_error_login">Invalid login credentials. Please try again.</string>
     <string name="default_error">Whoops something went wrong.</string>
     <string name="request_without_connection">Your network is unavailable. Check your data or wifi connection.</string>
+
+    <string name="title_tab_news">News</string>
+    <string name="title_tab_profile">Profile</string>
 
 </resources>
