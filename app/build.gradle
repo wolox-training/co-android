@@ -99,6 +99,7 @@ buildscript {
     ext.androidx_core_version = '1.3.2'
     ext.androidx_recycler_version = '1.1.0'
     ext.androidx_material_version = '1.2.0-alpha03'
+    ext.androidx_swipe_layout_version = '1.1.0'
     ext.constraint_version = '2.0.0-beta4'
     ext.dagger_version = '2.28.1'
     ext.wolmo_core_version = '4.1.1'
@@ -112,6 +113,8 @@ buildscript {
     ext.assertj_version = '3.9.0'
     ext.android_ktx_version = '1.1.0'
     ext.mockito_kotlin_version = "2.2.0"
+    ext.glide_version = "4.12.0"
+    ext.prettytime_version = "5.0.2.Final"
 }
 
 dependencies {
@@ -129,7 +132,7 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$androidx_recycler_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraint_version"
     implementation "com.google.android.material:material:$androidx_material_version"
-
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$androidx_swipe_layout_version"
     // Dagger
     implementation "com.google.dagger:dagger:$dagger_version"
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
@@ -142,6 +145,10 @@ dependencies {
     releaseImplementation "com.readystatesoftware.chuck:library-no-op:$chuck_version"
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leak_canary_version"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
+
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+    implementation "org.ocpsoft.prettytime:prettytime:$prettytime_version"
 
     // Testing dependencies
     testImplementation "junit:junit:$junit_version"
