@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.widget.ImageView
+import ar.com.wolox.android.R
 import com.bumptech.glide.Glide
 import org.ocpsoft.prettytime.PrettyTime
 import java.text.SimpleDateFormat
@@ -23,8 +24,10 @@ fun View.togglePresence(present: Boolean) {
     visibility = if (present) View.VISIBLE else View.GONE
 }
 
-fun String.abbreviationDayFormat(): String {
-    return PrettyTime().format(Date(SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(this).time))
-}
+const val TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+fun String.abbreviationDayFormat(): String = PrettyTime().format(Date(SimpleDateFormat(TIME_FORMAT).parse(this).time))
 
-fun ImageView.glideImage(url: String) = Glide.with(this).load(url).placeholder(ColorDrawable(Color.WHITE)).into(this)
+fun ImageView.glideImage(url: String) =
+    Glide.with(this).load(url).placeholder(ColorDrawable(Color.WHITE))
+        .error(R.drawable.wolox_logo)
+        .into(this)

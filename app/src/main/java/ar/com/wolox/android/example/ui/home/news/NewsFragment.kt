@@ -27,7 +27,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
                     1,
                     "Ali Connors",
                     "I'll be in your neighborhood doing errands...",
-                    "https://w7.pngwing.com/pngs/710/599/png-transparent-avatar-discord-cartoon-avatar-heroes-hat-photography.png",
+                    "error",
                     "2021-09-23T12:22:10.490Z",
                     false
                 ),
