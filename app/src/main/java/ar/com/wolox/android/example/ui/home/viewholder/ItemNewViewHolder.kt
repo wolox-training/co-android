@@ -1,32 +1,16 @@
 package ar.com.wolox.android.example.ui.home.viewholder
 
-import androidx.core.content.ContextCompat
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
-import ar.com.wolox.android.databinding.NewsItemBinding
-import ar.com.wolox.android.example.model.News
-import ar.com.wolox.android.example.ui.home.news.NewsView
-import ar.com.wolox.android.example.utils.glideImage
-import ar.com.wolox.android.example.utils.abbreviationDayFormat
 
-class ItemNewViewHolder constructor(private var binding: NewsItemBinding) : RecyclerView.ViewHolder(binding.root), NewsView {
+class ItemNewViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    override fun setItemsNews(item: News) {
-        with(binding) {
-            title.text = item.title
-            description.text = item.description
-            image.glideImage(item.image)
-            item.date.abbreviationDayFormat()?.let {
-                date.text = it
-            }
-            liked.apply {
-                setImageDrawable(
-                    ContextCompat.getDrawable(
-                        liked.context,
-                        if (item.liked) R.drawable.ic_like_on else R.drawable.ic_like_off
-                    )
-                )
-            }
-        }
-    }
+    val image: ImageView = view.findViewById(R.id.image)
+    val time: TextView = view.findViewById(R.id.date)
+    val title: TextView = view.findViewById(R.id.title)
+    val description: TextView = view.findViewById(R.id.description)
+    val liked: ImageView = view.findViewById(R.id.liked)
 }

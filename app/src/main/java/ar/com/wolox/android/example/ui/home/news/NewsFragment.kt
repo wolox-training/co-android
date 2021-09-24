@@ -57,8 +57,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
                 )
             )
 
-            presenter.onAddItemsNews(news)
-            adapter = NewsAdapter(presenter)
+            adapter = NewsAdapter(news)
             recyclerview.adapter = adapter
         }
     }
