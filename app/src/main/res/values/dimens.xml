@@ -50,4 +50,6 @@
     <dimen name="height_image_cover">200dp</dimen>
     <dimen name="height_image_logo">100dp</dimen>
 
+    <dimen name="news_item_height">90dp</dimen>
+    <dimen name="news_avatar">48dp</dimen>
 </resources>

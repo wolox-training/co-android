@@ -9,4 +9,5 @@
     <color name="colorAccent">#FFFFFF</color>
     <color name="colorIconBackground">#FFFFFF</color>
     <color name="colorTintTabSelected">#8DC63F</color>
+    <color name="colorBorderNews">#CABBBBBB</color>
 </resources>
