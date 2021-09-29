@@ -1,6 +1,9 @@
 package ar.com.wolox.android.example
 
 import ar.com.wolox.android.BuildConfig
+import ar.com.wolox.android.example.BaseConfiguration.Companion.HEADER_CLIENT
+import ar.com.wolox.android.example.BaseConfiguration.Companion.HEADER_TOKEN
+import ar.com.wolox.android.example.BaseConfiguration.Companion.HEADER_UID
 import ar.com.wolox.android.example.di.DaggerAppComponent
 import ar.com.wolox.android.example.utils.UserSession
 import ar.com.wolox.wolmo.core.WolmoApplication
@@ -57,9 +60,9 @@ class BootstrapApplication : WolmoApplication() {
         if (!request.url.encodedPath.equals("/auth/sign_in", ignoreCase = true)) {
             userSession.tokenInfo?.let {
                 request = request.newBuilder()
-                    .addHeader("Access-Token", it.token.toString())
-                    .addHeader("Client", it.client.toString())
-                    .addHeader("Uid", it.uid.toString())
+                    .addHeader(HEADER_TOKEN, it.token.toString())
+                    .addHeader(HEADER_CLIENT, it.client.toString())
+                    .addHeader(HEADER_UID, it.uid.toString())
                     .build()
             }
         }

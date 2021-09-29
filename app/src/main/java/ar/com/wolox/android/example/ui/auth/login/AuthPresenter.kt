@@ -1,5 +1,8 @@
 package ar.com.wolox.android.example.ui.auth.login
 
+import ar.com.wolox.android.example.BaseConfiguration.Companion.HEADER_CLIENT
+import ar.com.wolox.android.example.BaseConfiguration.Companion.HEADER_TOKEN
+import ar.com.wolox.android.example.BaseConfiguration.Companion.HEADER_UID
 import ar.com.wolox.android.example.model.LoginData
 import ar.com.wolox.android.example.model.TokenInfo
 import ar.com.wolox.android.example.network.builder.networkRequest
@@ -35,7 +38,11 @@ class AuthPresenter @Inject constructor(
                 userSession.apply {
                     username = email
                     this.password = password
-                    tokenInfo = TokenInfo(headers?.get("Client"), headers?.get("Access-Token"), headers?.get("Uid"))
+                    tokenInfo = TokenInfo(
+                        headers?.get(HEADER_CLIENT),
+                        headers?.get(HEADER_TOKEN),
+                        headers?.get(HEADER_UID)
+                    )
                 }
 
                 view?.setLoginUser()
