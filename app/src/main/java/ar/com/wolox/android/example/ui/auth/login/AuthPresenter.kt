@@ -1,6 +1,7 @@
 package ar.com.wolox.android.example.ui.auth.login
 
 import ar.com.wolox.android.example.model.LoginData
+import ar.com.wolox.android.example.model.TokenInfo
 import ar.com.wolox.android.example.network.builder.networkRequest
 import ar.com.wolox.android.example.network.repository.LoginRepository
 import ar.com.wolox.android.example.utils.UserSession
@@ -30,10 +31,11 @@ class AuthPresenter @Inject constructor(
 
         view?.showLoader(true)
         networkRequest(loginRepository.loginUser(LoginData(email, password))) {
-            onResponseSuccessful {
+            onResponseSuccessful { _, headers ->
                 userSession.apply {
                     username = email
                     this.password = password
+                    tokenInfo = TokenInfo(headers?.get("Client"), headers?.get("Access-Token"), headers?.get("Uid"))
                 }
 
                 view?.setLoginUser()

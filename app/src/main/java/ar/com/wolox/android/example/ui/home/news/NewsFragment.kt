@@ -1,85 +1,51 @@
 package ar.com.wolox.android.example.ui.home.news
 
-import android.os.Handler
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentNewsBinding
 import ar.com.wolox.android.example.model.News
+import ar.com.wolox.android.example.ui.home.news.adapter.EndlessRecyclerOnScrollListener
 import ar.com.wolox.android.example.ui.home.news.adapter.NewsAdapter
+import ar.com.wolox.android.example.utils.toggleVisibility
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
+import ar.com.wolox.wolmo.core.util.ToastFactory
 import javax.inject.Inject
 
-class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, NewsPresenter>(), NewsView {
-
-    lateinit var adapter: NewsAdapter
+class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, NewsPresenter>(), NewsView, SwipeRefreshLayout.OnRefreshListener {
+    @Inject internal lateinit var toastFactory: ToastFactory
 
     override fun layout() = R.layout.fragment_news
 
+    lateinit var scrollListener: EndlessRecyclerOnScrollListener
+
     override fun init() {
-        with(binding) {
-            recyclerview.apply {
-                layoutManager = LinearLayoutManager(context)
-                hasFixedSize()
+        binding.swipe.setOnRefreshListener(this)
+        binding.recyclerView.adapter = NewsAdapter()
+
+        scrollListener = object : EndlessRecyclerOnScrollListener() {
+            override fun onLoadMoreNews() {
+                presenter.loadNews()
             }
+        }
 
-            val news: List<News> = listOf(
-                News(
-                    1,
-                    "Ali Connors",
-                    "I'll be in your neighborhood doing errands...",
-                    "error",
-                    "2021-09-23T12:22:10.490Z",
-                    false
-                ),
-                News(
-                    2,
-                    "Ali Connors",
-                    "I'll be in your neighborhood doing errands...",
-                    "https://i.pinimg.com/originals/f5/ec/14/f5ec1493f8cf15a2f2d017ac9afe628d.jpg",
-                    "2021-09-23T12:22:10.490Z",
-                    true
-                ),
-                News(
-                    3,
-                    "Ali Connors",
-                    "I'll be in your neighborhood doing errands...",
-                    "https://i.pinimg.com/originals/42/2b/55/422b5542450bb18908f3ec6cc6004622.png",
-                    "2021-09-23T13:22:10.490Z",
-                    false
-                ),
-                News(
-                    4,
-                    "Ali Connors",
-                    "I'll be in your neighborhood doing errands...",
-                    "https://emoji.gg/assets/emoji/7017-panda-exicted.png",
-                    "2021-09-23T13:28:10.490Z",
-                    false
-                )
-            )
+        binding.recyclerView.addOnScrollListener(scrollListener)
+        presenter.onInit()
+    }
 
-            adapter = NewsAdapter(news)
-            recyclerview.adapter = adapter
+    override fun loadNews(news: List<News>) {
+        with(binding.recyclerView.adapter as NewsAdapter) {
+            this.addNews(news)
         }
     }
 
-    override fun setListeners() {
-        with(binding) {
-            swipe.setOnRefreshListener {
-                Handler().postDelayed({
-                    swipe.isRefreshing = false
-                }, 2000)
-            }
-        }
-    }
-
-    override fun setItemsNews(item: News) {}
+    override fun clearNews() = (binding.recyclerView.adapter as NewsAdapter).clear()
+    override fun showLoader(visible: Boolean) = binding.loading.toggleVisibility(visible)
+    override fun responseFailed() = toastFactory.show(R.string.default_error)
+    override fun responseFailure() = toastFactory.show(R.string.request_without_connection)
+    override fun onRefresh() = presenter.onRefresh()
+    override fun finishRefreshing() { binding.swipe.isRefreshing = false }
 
     companion object {
         fun newInstance() = NewsFragment()
     }
-}
-
-interface NewsView {
-
-    fun setItemsNews(item: News)
 }
