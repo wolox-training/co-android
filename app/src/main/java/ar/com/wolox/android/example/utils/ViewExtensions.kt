@@ -28,6 +28,7 @@ const val TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
 fun String.abbreviationDayFormat(): String = PrettyTime().format(Date(SimpleDateFormat(TIME_FORMAT).parse(this).time))
 
 fun ImageView.glideImage(url: String) =
-    Glide.with(this).load(url).placeholder(ColorDrawable(Color.WHITE))
+    Glide.with(this).load(url)
+        .placeholder(ColorDrawable(Color.GRAY))
         .error(R.drawable.wolox_logo)
         .into(this)

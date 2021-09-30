@@ -2,9 +2,11 @@ package ar.com.wolox.android.example.model
 
 data class News(
     val id: Int,
-    val title: String,
-    val description: String,
-    val image: String,
+    val commenter: String,
+    val comment: String,
     val date: String,
-    val liked: Boolean
+    val avatar: String,
+    val likes: List<Int>,
+    val createdAt: String,
+    val updatedAt: String
 )
