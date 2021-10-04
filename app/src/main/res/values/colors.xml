@@ -10,4 +10,6 @@
     <color name="colorIconBackground">#FFFFFF</color>
     <color name="colorTintTabSelected">#8DC63F</color>
     <color name="colorBorderNews">#CABBBBBB</color>
+    <color name="toolbar_detail_transparent">#A6060405</color>
+    <color name="toolbar_title">#7589EA</color>
 </resources>

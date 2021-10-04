@@ -17,8 +17,11 @@
     <string name="request_error_login">Invalid login credentials. Please try again.</string>
     <string name="default_error">Whoops something went wrong.</string>
     <string name="request_without_connection">Your network is unavailable. Check your data or wifi connection.</string>
+    <string name="message_liked">Like updated successfully</string>
 
     <string name="title_tab_news">News</string>
     <string name="title_tab_profile">Profile</string>
+    <string name="fragment_title_new_details">Post</string>
+    <string name="description_like_image">Icon like</string>
 
 </resources>

@@ -10,9 +10,13 @@ import ar.com.wolox.android.example.ui.home.viewholder.ItemNewViewHolder
 import ar.com.wolox.android.example.utils.glideImage
 import ar.com.wolox.android.example.utils.abbreviationDayFormat
 
-class NewsAdapter() : RecyclerView.Adapter<ItemNewViewHolder>() {
+class NewsAdapter(private val listener: NewsListener, private val idUser: Int) : RecyclerView.Adapter<ItemNewViewHolder>() {
 
     private var news = mutableListOf<News>()
+
+    interface NewsListener {
+        fun openDetail(news: News)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemNewViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.news_item, parent, false)
@@ -31,10 +35,11 @@ class NewsAdapter() : RecyclerView.Adapter<ItemNewViewHolder>() {
                 setImageDrawable(
                     ContextCompat.getDrawable(
                         liked.context,
-                        if (news[position].likes.isNotEmpty()) R.drawable.ic_like_on else R.drawable.ic_like_off
+                        if (news[position].likes.contains(idUser)) R.drawable.ic_like_on else R.drawable.ic_like_off
                     )
                 )
             }
+            newsItem.setOnClickListener { listener.openDetail(news[position]) }
         }
     }
 

@@ -1,12 +1,14 @@
 package ar.com.wolox.android.example.model
 
+import java.io.Serializable
+
 data class News(
     val id: Int,
-    val commenter: String,
-    val comment: String,
-    val date: String,
-    val avatar: String,
-    val likes: List<Int>,
+    var commenter: String,
+    var comment: String,
+    var date: String,
+    var avatar: String,
+    var likes: MutableList<Int>,
     val createdAt: String,
     val updatedAt: String
-)
+) : Serializable
