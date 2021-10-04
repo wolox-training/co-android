@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
 
 class ItemNewViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
+    val newsItem = view.rootView
     val image: ImageView = view.findViewById(R.id.image)
     val time: TextView = view.findViewById(R.id.date)
     val title: TextView = view.findViewById(R.id.title)

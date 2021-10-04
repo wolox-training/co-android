@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/ViewLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="2">
+
+                <RelativeLayout
+                    android:id="@+id/coverPanel"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_none"
+                    android:layout_weight=".8">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/coverImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/mock_cover" />
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="@color/toolbar_detail_transparent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                        app:title="@string/fragment_title_new_details"
+                        app:titleTextColor="@color/toolbar_title" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/informationPanel"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_none"
+                    android:layout_weight="1.2">
+
+                    <LinearLayout
+                        android:id="@+id/titleLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/static_spacing_big"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:id="@+id/titlePanel"
+                            android:layout_width="@dimen/spacing_none"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.6">
+
+                            <TextView
+                                android:id="@+id/title"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="@dimen/static_spacing_medium_extra"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/font_huge"
+                                android:textStyle="bold"
+                                tools:text="Rep. Yuonne Christiansen Crooks" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/datePanel"
+                            android:layout_width="@dimen/spacing_none"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/static_spacing_medium_extra"
+                            android:layout_weight=".4">
+
+                            <TextView
+                                android:id="@+id/date"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical|end"
+                                android:maxLength="7"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                tools:text="15m" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/titleLayout"
+                        android:layout_marginHorizontal="@dimen/static_spacing_medium_extra"
+                        android:layout_marginTop="@dimen/static_spacing_medium_extra"
+                        tools:text="You want to enjoy life, don't you? If you get your job done quickly and your job is fun, that's good isn't it? That's the purpose of life, partly. Your life is better." />
+
+                    <ImageView
+                        android:id="@+id/liked"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="@dimen/spacing_largest_extra"
+                        android:contentDescription="@string/description_like_image"
+                        android:src="@drawable/ic_like_off_large" />
+                </RelativeLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</layout>

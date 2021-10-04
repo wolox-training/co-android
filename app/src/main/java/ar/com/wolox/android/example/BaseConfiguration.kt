@@ -6,6 +6,8 @@ internal open class BaseConfiguration {
         const val EXAMPLE_CONFIGURATION_KEY = "https://w-android-traning-backup2.herokuapp.com"
         const val SHARED_PREFERENCES_NAME = "private-shared-prefs"
 
+        const val TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+
         const val HEADER_TOKEN = "Access-Token"
         const val HEADER_CLIENT = "Client"
         const val HEADER_UID = "Uid"

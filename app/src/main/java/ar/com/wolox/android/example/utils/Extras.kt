@@ -12,9 +12,14 @@ import ar.com.wolox.android.example.model.LoginData
 object Extras {
 
     object UserLogin {
+        const val USER = "user"
         const val USERNAME = "username"
         const val PASSWORD = "password"
         const val TOKEN_INFO = "auth"
+    }
+
+    object ArgumentsFragmentDetails {
+        const val NEW = "new"
     }
 
     object MockTesting {

@@ -1,7 +1,7 @@
 package ar.com.wolox.android.example.ui.auth.login
 
+import ar.com.wolox.android.example.model.DataUserResponse
 import ar.com.wolox.android.example.model.LoginData
-import ar.com.wolox.android.example.model.LoginResponse
 import ar.com.wolox.android.example.network.repository.LoginRepository
 import ar.com.wolox.android.example.utils.Extras
 import ar.com.wolox.android.example.utils.UserSession
@@ -76,7 +76,7 @@ class AuthPresenterTest : WolmoPresenterTest<AuthView, AuthPresenter>() {
     @Test
     fun `When credentials are wrong`() = runBlocking {
         val userLoginData = Extras.MockTesting.FAIL_USERDATA
-        val response = mock(Response::class.java) as Response<LoginResponse>
+        val response = mock(Response::class.java) as Response<DataUserResponse>
         whenever(loginRepository.loginUser(userLoginData)).doReturn(NetworkResponse.Error(response))
 
         presenter.onLoginButtonClicked(
@@ -90,7 +90,7 @@ class AuthPresenterTest : WolmoPresenterTest<AuthView, AuthPresenter>() {
     @Test
     fun `When the password is incorrect`() = runBlocking {
         val userLoginData = LoginData(Extras.MockTesting.EMAIL, Extras.MockTesting.FAIL_PASSWORD)
-        val response = mock(Response::class.java) as Response<LoginResponse>
+        val response = mock(Response::class.java) as Response<DataUserResponse>
         whenever(loginRepository.loginUser(userLoginData)).doReturn(NetworkResponse.Error(response))
 
         presenter.onLoginButtonClicked(
@@ -104,7 +104,7 @@ class AuthPresenterTest : WolmoPresenterTest<AuthView, AuthPresenter>() {
     @Test
     fun `When the email is incorrect`() = runBlocking {
         val userLoginData = LoginData(Extras.MockTesting.FAIL_EMAIL, Extras.MockTesting.PASSWORD)
-        val response = mock(Response::class.java) as Response<LoginResponse>
+        val response = mock(Response::class.java) as Response<DataUserResponse>
         whenever(loginRepository.loginUser(userLoginData)).doReturn(NetworkResponse.Error(response))
 
         presenter.onLoginButtonClicked(
@@ -118,7 +118,7 @@ class AuthPresenterTest : WolmoPresenterTest<AuthView, AuthPresenter>() {
     @Test
     fun `When the credentials are correct`() = runBlocking {
         val userLoginData = Extras.MockTesting.USERDATA
-        val response = mock(Response::class.java) as Response<LoginResponse>
+        val response = mock(Response::class.java) as Response<DataUserResponse>
         whenever(loginRepository.loginUser(userLoginData)).doReturn(NetworkResponse.Success(response))
 
         presenter.onLoginButtonClicked(Extras.MockTesting.EMAIL, Extras.MockTesting.PASSWORD).join()

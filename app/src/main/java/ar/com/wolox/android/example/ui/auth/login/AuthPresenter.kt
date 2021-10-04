@@ -34,8 +34,9 @@ class AuthPresenter @Inject constructor(
 
         view?.showLoader(true)
         networkRequest(loginRepository.loginUser(LoginData(email, password))) {
-            onResponseSuccessful { _, headers ->
+            onResponseSuccessful { response, headers ->
                 userSession.apply {
+                    user = response?.data
                     username = email
                     this.password = password
                     tokenInfo = TokenInfo(
