@@ -6,7 +6,7 @@ import ar.com.wolox.android.databinding.FragmentNewsBinding
 import ar.com.wolox.android.example.model.News
 import ar.com.wolox.android.example.ui.home.news.adapter.EndlessRecyclerOnScrollListener
 import ar.com.wolox.android.example.ui.home.news.adapter.NewsAdapter
-import ar.com.wolox.android.example.ui.home.news.detail.NewDetailActivity
+import ar.com.wolox.android.example.ui.home.news.detail.NewsDetailActivity
 import ar.com.wolox.android.example.utils.UserSession
 import ar.com.wolox.android.example.utils.toggleVisibility
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
@@ -59,7 +59,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
     override fun responseFailure() = toastFactory.show(R.string.request_without_connection)
     override fun onRefresh() = presenter.onRefresh()
     override fun finishRefreshing() { binding.swipe.isRefreshing = false }
-    override fun openDetail(new: News) = NewDetailActivity.start(requireContext(), new)
+    override fun openDetail(news: News) = NewsDetailActivity.start(requireContext(), news)
 
     companion object {
         fun newInstance() = NewsFragment()

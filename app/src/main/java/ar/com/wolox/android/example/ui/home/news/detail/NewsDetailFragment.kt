@@ -16,17 +16,17 @@ import ar.com.wolox.wolmo.core.util.ToastFactory
 import javax.inject.Inject
 import android.widget.LinearLayout
 
-class NewDetailFragment @Inject constructor() : WolmoFragment<FragmentNewsDetailBinding, NewDetailPresenter>(), NewDetailView {
+class NewDetailFragment @Inject constructor() : WolmoFragment<FragmentNewsDetailBinding, NewsDetailPresenter>(), NewDetailView {
 
     @Inject internal lateinit var toastFactory: ToastFactory
 
     override fun layout() = R.layout.fragment_news_detail
 
-    override fun handleArguments(arguments: Bundle?) = arguments?.containsKey(Extras.ArgumentsFragmentDetails.NEW)
+    override fun handleArguments(arguments: Bundle?) = arguments?.containsKey(Extras.ArgumentsFragmentDetails.NEWS)
 
     override fun init() {
         binding.toolbar.setNavigationIcon(R.drawable.ic_back_toolbar)
-        presenter.onInit(requireArgument(Extras.ArgumentsFragmentDetails.NEW) as News)
+        presenter.onInit(requireArgument(Extras.ArgumentsFragmentDetails.NEWS) as News)
     }
 
     override fun setListeners() {
@@ -38,20 +38,20 @@ class NewDetailFragment @Inject constructor() : WolmoFragment<FragmentNewsDetail
         }
     }
 
-    override fun showInformation(new: News, userId: Int) {
+    override fun showInformation(news: News, userId: Int) {
         with(binding) {
-            title.text = new.commenter
-            description.text = new.comment
-            new.updatedAt.abbreviationDayFormat().let {
+            title.text = news.commenter
+            description.text = news.comment
+            news.updatedAt.abbreviationDayFormat().let {
                 date.text = it
             }
-            coverImage.glideImage(new.avatar, R.drawable.mock_cover)
+            coverImage.glideImage(news.avatar, R.drawable.mock_cover)
             with(binding) {
                 liked.apply {
                     setImageDrawable(
                         ContextCompat.getDrawable(
                             liked.context,
-                            if (new.likes.contains(userId)) R.drawable.ic_like_on_large else R.drawable.ic_like_off_large
+                            if (news.likes.contains(userId)) R.drawable.ic_like_on_large else R.drawable.ic_like_off_large
                         )
                     )
                 }
@@ -59,7 +59,7 @@ class NewDetailFragment @Inject constructor() : WolmoFragment<FragmentNewsDetail
         }
     }
 
-    override fun fullsScreen(imageFullScreen: Boolean) {
+    override fun fullScreen(imageFullScreen: Boolean) {
         with(binding) {
             val params = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, 0
@@ -92,17 +92,17 @@ class NewDetailFragment @Inject constructor() : WolmoFragment<FragmentNewsDetail
     }
 
     companion object {
-        fun newInstance(new: News) = NewDetailFragment().apply {
-            arguments = bundleOf(Extras.ArgumentsFragmentDetails.NEW to new)
+        fun newInstance(news: News) = NewDetailFragment().apply {
+            arguments = bundleOf(Extras.ArgumentsFragmentDetails.NEWS to news)
         }
     }
 }
 
 interface NewDetailView {
 
-    fun showInformation(new: News, userId: Int)
+    fun showInformation(news: News, userId: Int)
     fun finishRefreshing()
-    fun fullsScreen(imageFullScreen: Boolean)
+    fun fullScreen(imageFullScreen: Boolean)
     fun enabledLikedButton(enabled: Boolean)
     fun likedButton(likedState: Boolean)
     fun responseFailed()

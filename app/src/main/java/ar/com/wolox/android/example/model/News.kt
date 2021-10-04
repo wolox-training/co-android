@@ -11,12 +11,4 @@ data class News(
     var likes: MutableList<Int>,
     val createdAt: String,
     val updatedAt: String
-) : Serializable {
-    fun update(new: NewDetailResponse) {
-        commenter = new.commenter
-        comment = new.comment
-        date = new.date
-        avatar = new.avatar
-        likes = new.likes.toMutableList()
-    }
-}
+) : Serializable

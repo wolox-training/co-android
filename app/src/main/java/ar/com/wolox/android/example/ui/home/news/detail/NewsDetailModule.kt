@@ -4,10 +4,10 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class NewDetailModule {
+abstract class NewsDetailModule {
 
     @ContributesAndroidInjector
-    internal abstract fun newDetailActivity(): NewDetailActivity
+    internal abstract fun newDetailActivity(): NewsDetailActivity
 
     @ContributesAndroidInjector
     internal abstract fun newDetailFragment(): NewDetailFragment

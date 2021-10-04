@@ -15,7 +15,7 @@ class NewsAdapter(private val listener: NewsListener, private val idUser: Int) :
     private var news = mutableListOf<News>()
 
     interface NewsListener {
-        fun openDetail(new: News)
+        fun openDetail(news: News)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemNewViewHolder {

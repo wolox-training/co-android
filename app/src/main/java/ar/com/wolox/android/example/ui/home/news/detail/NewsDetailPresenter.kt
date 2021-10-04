@@ -8,45 +8,46 @@ import ar.com.wolox.wolmo.core.presenter.CoroutineBasePresenter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class NewDetailPresenter @Inject constructor(private val newsRepository: NewsRepository, private val userSession: UserSession) : CoroutineBasePresenter<NewDetailView>() {
+class NewsDetailPresenter @Inject constructor(
+    private val newsRepository: NewsRepository,
+    private val userSession: UserSession
+) : CoroutineBasePresenter<NewDetailView>() {
 
-    private lateinit var new: News
+    private lateinit var news: News
     private var imageFullscreen = false
 
-    fun onInit(new: News) {
-        this.new = new
+    fun onInit(news: News) {
+        this.news = news
         userSession.user?.id?.let {
-            view?.showInformation(new, it)
+            view?.showInformation(news, it)
         }
     }
 
     fun onRefresh() = launch {
-        networkRequest(newsRepository.getInformationNew(new.id)) {
+        networkRequest(newsRepository.getInformationNew(news.id)) {
             onResponseSuccessful { response, _ ->
                 response?.let {
-                    new.update(it)
+                    news.commenter = it.commenter
+                    news.comment = it.comment
+                    news.date = it.date
+                    news.avatar = it.avatar
+                    news.likes = it.likes.toMutableList()
                 }
-                userSession.user?.id?.let {
-                    view?.showInformation(new, it)
-                }
+                userSession.user?.id?.let { view?.showInformation(news, it) }
             }
-            onResponseFailed { _, _ -> }
-            onCallFailure { }
+            onResponseFailed { _, _ -> view?.responseFailed() }
+            onCallFailure { view?.responseFailure() }
             view?.finishRefreshing()
         }
     }
 
     fun onClickLiked() = launch {
         view?.enabledLikedButton(false)
-        networkRequest(newsRepository.toggleLiked(new.id)) {
+        networkRequest(newsRepository.toggleLiked(news.id)) {
             onResponseSuccessful { _, _ ->
                 userSession.user?.id?.let {
-                    if (new.likes.contains(it)) {
-                        new.likes.remove(it)
-                    } else {
-                        new.likes.add(it)
-                    }
-                    view?.likedButton(new.likes.contains(it))
+                    if (news.likes.contains(it)) news.likes.remove(it) else news.likes.add(it)
+                    view?.likedButton(news.likes.contains(it))
                 }
             }
             onResponseFailed { _, _ -> view?.responseFailed() }
@@ -56,7 +57,7 @@ class NewDetailPresenter @Inject constructor(private val newsRepository: NewsRep
     }
 
     fun onClickImage() {
-        view?.fullsScreen(!imageFullscreen)
+        view?.fullScreen(!imageFullscreen)
         imageFullscreen = !imageFullscreen
     }
 }

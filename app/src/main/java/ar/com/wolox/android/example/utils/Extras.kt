@@ -19,7 +19,7 @@ object Extras {
     }
 
     object ArgumentsFragmentDetails {
-        const val NEW = "new"
+        const val NEWS = "news"
     }
 
     object MockTesting {
